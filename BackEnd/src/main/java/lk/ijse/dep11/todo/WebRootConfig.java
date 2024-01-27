@@ -21,7 +21,7 @@ public class WebRootConfig {
         config.setJdbcUrl(env.getRequiredProperty("spring.datasource.url"));
         config.setDriverClassName(env.getRequiredProperty("spring.datasource.driver-class-name"));
         config.setMaximumPoolSize(env.getRequiredProperty("spring.datasource.hikari.maximum-pool-size", Integer.class));
-                return  new HikariDataSource(config);
+        return  new HikariDataSource(config);
 
 
 

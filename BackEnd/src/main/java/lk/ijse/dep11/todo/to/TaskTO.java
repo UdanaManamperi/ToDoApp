@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskTO implements Serializable {
-
+    @Null(message = "Id should be empty")
     private Integer id;
     @NotBlank(message = "Description should not be empty")
     private String description;
@@ -25,6 +25,6 @@ public class TaskTO implements Serializable {
     @Email
     private String email;
 
-    public interface Update extends Builder.Default{}
-    public interface Create extends Builder.Default{}
+    public interface Update extends Default{}
+    public interface Create extends Default{}
 }
