@@ -6,6 +6,7 @@ import {onAuthStateChanged} from 'firebase/auth'
 import {auth} from "./firebase.ts";
 import {Loader} from "./component/loader/Loader.tsx";
 import {Header} from "./component/header/Header.tsx";
+import {Form} from "./component/form/Form.tsx";
 
 function App() {
     const user = useUser();
@@ -29,6 +30,7 @@ function App() {
                 user?
                     (<>
                             <Header/>
+                            <Form/>
                         </>
                     ): <SignIn/>
             }
