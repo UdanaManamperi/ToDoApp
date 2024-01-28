@@ -1,20 +1,16 @@
-
 import './App.css'
 import {SignIn} from "./component/signin/SignIn.tsx";
 import {useUser, useUserDispatcher} from "./context/UserContext.tsx";
-import {useEffect,useState} from "react";
+import {useEffect, useState} from "react";
 import {onAuthStateChanged} from 'firebase/auth'
 import {auth} from "./firebase.ts";
-import {Loader} from "./component/loader/Loader.tsx"
-
-
+import {Loader} from "./component/loader/Loader.tsx";
+import {Header} from "./component/header/Header.tsx";
 
 function App() {
     const user = useUser();
     const userDispatcher = useUserDispatcher();
-    const [loader,setLoader]=useState(true);
-
-
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {
         onAuthStateChanged(auth, user => {
@@ -27,14 +23,17 @@ function App() {
         })
     }, []);
 
-
-  return (
-    <>
-        {loader? <Loader/> :
-            user?
-                ( <h1>To do app</h1>): <SignIn/>
-        }
-    </>
-  )
+    return (
+        <>
+            {loader? <Loader/> :
+                user?
+                    (<>
+                            <Header/>
+                        </>
+                    ): <SignIn/>
+            }
+        </>
+    )
 }
 
+export default App
