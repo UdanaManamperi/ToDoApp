@@ -33,17 +33,21 @@ function App() {
     }, []);
 
     return (
-        <>
-            {loader? <Loader/> :
-                user?
+        <div className="d-flex flex-column min-vh-100">
+            {loader ? <Loader/> :
+                user ?
                     <>
                         <Header/>
                         <Form/>
                         <TaskList/>
                     </> : <SignIn/>
-
             }
-        </>
+            <footer className="footer mt-auto">
+                <div className="d-flex align-items-center justify-content-center container  border-top">
+                    <p className="text-muted mb-0">Copyright &copy; 2023 Udana Manamperi. All Right Reserved</p>
+                </div>
+            </footer>
+        </div>
     )
 }
 

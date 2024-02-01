@@ -17,7 +17,7 @@ export function Task(task:TaskDTO) {
             });
 
         }).catch(err => {
-            
+
             alert("Failed to update task")
         })
     }
