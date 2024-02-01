@@ -13,8 +13,6 @@ export function Form() {
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if(!value.trim()) return;
-        // Todo: Create a new task
-        // Todo: Add into the task list
         saveTask(new TaskDTO(null, value, null, user?.email!))
             .then(task => {
                 taskDispatcher({
