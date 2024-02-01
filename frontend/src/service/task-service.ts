@@ -12,3 +12,25 @@ export async function saveTask(task: TaskDTO) {
         body: JSON.stringify(task)
     })).json() as TaskDTO;
 }
+
+export async function updateTask(task: TaskDTO) {
+    const response = await fetch(`${API_BASE_URL}/${task.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            description: task.description,
+            status: !task.status,
+            email: task.email
+        })
+    });
+    if(!response.ok) throw new Error("Failed to update task");
+}
+
+export async function deleteTask(taskId: number) {
+    const response = await fetch(`${API_BASE_URL}/${taskId}`, {
+        method: 'DELETE'
+    });
+    if(!response.ok) throw new Error("Failed to delete task")
+}
