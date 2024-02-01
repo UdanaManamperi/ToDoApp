@@ -7,19 +7,30 @@ import {auth} from "./firebase.ts";
 import {Loader} from "./component/loader/Loader.tsx";
 import {Header} from "./component/header/Header.tsx";
 import {Form} from "./component/form/Form.tsx";
+import {useTaskDispatcher, useTaskList} from "./context/TaskContext.tsx";
+import {getAllTasks} from "./service/task-service.ts";
 
 function App() {
     const user = useUser();
     const userDispatcher = useUserDispatcher();
     const [loader, setLoader] = useState(true);
+    const taskList = useTaskList();
+    const taskDispatcher = useTaskDispatcher();
+
 
     useEffect(() => {
         onAuthStateChanged(auth, user => {
+            setLoader(false);
             if(user) {
-                setLoader(false);
-                userDispatcher({type: 'sign-in', user})
+                userDispatcher({type: 'sign-in', user});
+                getAllTasks(user.email!).then(taskList => {
+                    taskDispatcher({type: 'set-list', taskList})
+                });
+
+
             } else {
                 userDispatcher({type: 'sign-out'})
+                taskDispatcher({type: 'set-list', taskList: []})
             }
         })
     }, []);
@@ -28,11 +39,16 @@ function App() {
         <>
             {loader? <Loader/> :
                 user?
-                    (<>
-                            <Header/>
-                            <Form/>
-                        </>
-                    ): <SignIn/>
+                    <>
+                        <Header/>
+                        <Form/>
+                        <div>
+                            {taskList.map(task =>
+                                <h1>{task.description}</h1>
+                            )}
+                        </div>
+                    </> : <SignIn/>
+
             }
         </>
     )
