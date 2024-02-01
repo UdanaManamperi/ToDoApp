@@ -13,7 +13,7 @@ function taskReducer(taskList: TaskDTO[], action: Action) {
     if(action.type === 'add') {
         return [...taskList, action.task];
     } else if (action.type === 'delete') {
-        return taskList.filter(task => task.id !== action.task)
+        return taskList.filter(task => task.id !== action.id)
     } else if (action.type === 'update') {
         return taskList.map(task => {
             if(task.id === action.task.id) {

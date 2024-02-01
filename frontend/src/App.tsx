@@ -45,7 +45,7 @@ function App() {
                         <Form/>
                         <div>
                             {taskList.map(task =>
-                                <Task {...task}/>
+                                <Task key={task.id} {...task}/>
                             )}
                         </div>
                     </> : <SignIn/>
